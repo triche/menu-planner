@@ -144,7 +144,7 @@ const MealPlanInput: React.FC<MealPlanInputProps> = ({
           value={stylePreferences}
           onChange={(e) => setStylePreferences(e.target.value)}
           placeholder="e.g., Mediterranean, quick meals, vegetarian, high-protein, comfort food..."
-          rows={3}
+          rows={4}
         />
       </div>
 
@@ -154,7 +154,7 @@ const MealPlanInput: React.FC<MealPlanInputProps> = ({
           value={dietaryRestrictions}
           onChange={(e) => setDietaryRestrictions(e.target.value)}
           placeholder="e.g., allergies, foods to avoid, specific dietary requirements..."
-          rows={2}
+          rows={3}
         />
       </div>
 
@@ -164,7 +164,7 @@ const MealPlanInput: React.FC<MealPlanInputProps> = ({
           value={previousWeekMenu}
           onChange={(e) => setPreviousWeekMenu(e.target.value)}
           placeholder="Paste your previous week's meals here to avoid repetition..."
-          rows={4}
+          rows={5}
         />
       </div>
 

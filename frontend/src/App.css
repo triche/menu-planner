@@ -8,8 +8,8 @@
   --text-secondary: #6c757d;
   --text-accent: #495057;
   --border-color: #dee2e6;
-  --accent-color: #0d6efd;
-  --accent-hover: #0b5ed7;
+  --accent-color: #16a085;
+  --accent-hover: #138d75;
   --success-color: #198754;
   --error-color: #dc3545;
   --warning-color: #fd7e14;
@@ -37,8 +37,8 @@ html.dark {
   --text-secondary: #b0b0b0;
   --text-accent: #d0d0d0;
   --border-color: #555555;
-  --accent-color: #4dabf7;
-  --accent-hover: #339af0;
+  --accent-color: #1abc9c;
+  --accent-hover: #17a589;
   --success-color: #51cf66;
   --error-color: #ff6b6b;
   --warning-color: #ffa94d;
@@ -123,9 +123,27 @@ body {
 
 .app-layout {
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: minmax(380px, 420px) 1fr;
   gap: 2rem;
   margin-top: 2rem;
+  align-items: start;
+}
+
+.input-section {
+  position: relative;
+  min-width: 0; /* Prevents overflow */
+}
+
+.plan-section {
+  position: relative;
+  min-width: 0; /* Prevents overflow */
+}
+
+@media (max-width: 1200px) {
+  .app-layout {
+    grid-template-columns: minmax(350px, 380px) 1fr;
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -146,13 +164,13 @@ body {
 }
 
 .info-message {
-  background-color: #e3f2fd;
+  background-color: #e8f5e8;
   border-color: var(--accent-color);
   color: var(--accent-color);
 }
 
 html.dark .info-message {
-  background-color: rgba(77, 171, 247, 0.1);
+  background-color: rgba(26, 188, 156, 0.1);
   color: var(--accent-color);
 }
 
@@ -181,6 +199,9 @@ html.dark .info-message {
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
   height: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .input-section {
@@ -225,12 +246,15 @@ html.dark .info-message {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: border-color 0.2s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .input-group input:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.25);
 }
 
 /* Checkbox Groups */
@@ -257,6 +281,7 @@ html.dark .info-message {
 /* Textarea */
 textarea {
   width: 100%;
+  max-width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-sm);
@@ -266,12 +291,13 @@ textarea {
   color: var(--text-primary);
   resize: vertical;
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
 }
 
 textarea:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.25);
 }
 
 /* Generate Button */
@@ -305,6 +331,10 @@ textarea:focus {
   border-radius: var(--border-radius-lg);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: auto; /* Handle horizontal overflow gracefully */
 }
 
 .weekly-meal-plan h2 {
@@ -335,6 +365,7 @@ textarea:focus {
 .meal-plan-table {
   display: grid;
   grid-template-columns: 120px repeat(3, 1fr) 140px;
+  grid-auto-rows: minmax(150px, auto);
   gap: 1px;
   background-color: var(--border-color);
   border-radius: var(--border-radius-md);
@@ -364,21 +395,23 @@ textarea:focus {
 .totals-cell {
   background-color: var(--bg-primary);
   padding: 1rem;
-  min-height: 120px;
+  min-height: 150px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .day-cell {
   background-color: var(--bg-tertiary);
   font-weight: 600;
   justify-content: center;
+  align-items: center;
 }
 
 .meal-cell {
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
+  height: auto;
 }
 
 .meal-info h4 {
@@ -398,9 +431,13 @@ textarea:focus {
 }
 
 .ingredients {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
   font-style: italic;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .empty-meal {
@@ -413,6 +450,7 @@ textarea:focus {
   background-color: var(--bg-tertiary);
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .daily-totals {
@@ -599,6 +637,11 @@ textarea:focus {
 @media (max-width: 768px) {
   .App-main {
     padding: 1rem;
+  }
+  
+  .app-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .header-content {

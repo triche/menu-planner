@@ -1,7 +1,7 @@
 import { UserPreferences, MealPlanResponse } from '../types';
 
 // Backend API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3002/api';
 
 // Use backend proxy instead of direct OpenAI calls
 export const generateMealPlan = async (preferences: UserPreferences): Promise<MealPlanResponse> => {

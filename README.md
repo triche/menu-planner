@@ -46,23 +46,50 @@ git clone <repository-url>
 cd menu-planner
 ```
 
-2. Install dependencies:
+2. Install frontend dependencies:
 ```bash
+cd frontend
 npm install
 ```
 
-3. Set up environment variables (optional):
+3. Install backend dependencies:
 ```bash
-cp .env.example .env.local
-# Edit .env.local and add your OpenAI API key
+cd ../backend
+npm install
 ```
 
-4. Start the development server:
-```bash
-npm run dev
-```
+4. Set up environment variables:
 
-5. Open your browser to `http://localhost:5173`
+   **Backend (.env)**:
+   ```bash
+   cd backend
+   cp .env.example .env
+   # Edit .env and add your OpenAI API key:
+   OPENAI_API_KEY=sk-proj-your-openai-api-key-here
+   ```
+   
+   **Frontend (.env.local)**:
+   ```bash
+   cd ../frontend
+   # The .env.local should contain:
+   VITE_API_BASE_URL=http://localhost:3002/api
+   ```
+
+5. Start the application:
+
+   **Backend server**:
+   ```bash
+   cd backend
+   npm start
+   ```
+   
+   **Frontend development server**:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+6. Open your browser to `http://localhost:5173`
 
 ### API Key Configuration
 
@@ -90,21 +117,35 @@ You can provide your OpenAI API key in two ways:
 
 ### Component Structure
 ```
-src/
-├── components/
-│   ├── Header.tsx              # App header with theme toggle and settings
-│   ├── MealPlanInput.tsx       # Input form for preferences and targets
-│   ├── WeeklyMealPlan.tsx      # Weekly meal plan display table
-│   └── ApiKeySettings.tsx      # API key configuration modal
-├── contexts/
-│   └── ThemeContext.tsx        # Dark/light mode theme management
-├── services/
-│   └── mealPlanService.ts      # OpenAI API integration
-├── types/
-│   └── index.ts               # TypeScript type definitions
-└── prompts/
-    ├── meal-generation-prompt.txt  # AI system prompt
-    └── README.md              # Prompt documentation
+menu-planner/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.tsx              # App header with theme toggle and settings
+│   │   │   ├── MealPlanInput.tsx       # Input form for preferences and targets
+│   │   │   ├── WeeklyMealPlan.tsx      # Weekly meal plan display table
+│   │   │   └── ApiKeySettings.tsx      # API key configuration modal
+│   │   ├── contexts/
+│   │   │   └── ThemeContext.tsx        # Dark/light mode theme management
+│   │   ├── services/
+│   │   │   └── mealPlanService.ts      # Backend API integration
+│   │   ├── types/
+│   │   │   └── index.ts               # TypeScript type definitions
+│   │   ├── App.tsx                    # Main application component
+│   │   └── main.tsx                   # Application entry point
+│   ├── prompts/
+│   │   ├── meal-generation-prompt.txt  # AI system prompt
+│   │   └── README.md                  # Prompt documentation
+│   ├── package.json                   # Frontend dependencies
+│   └── vite.config.ts                # Vite configuration
+└── backend/
+    ├── src/
+    │   ├── routes/                    # API routes
+    │   ├── services/                  # OpenAI integration
+    │   ├── middleware/                # Security and validation
+    │   └── server.js                  # Express server
+    ├── package.json                   # Backend dependencies
+    └── .env                          # Backend environment variables
 ```
 
 ### Key Technologies
